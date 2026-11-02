@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رحلة الإبداع البرمجي | فيجوال بيسك 2008 - الصف الثاني عشر</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            tajawal: ['Tajawal', 'sans-serif'],
+          },
+          colors: {
+            vbPurple: '#7C3AED',
+            vbPink: '#EC4899',
+            vbTeal: '#0D9488',
+            vbBlue: '#2563EB',
+            vbYellow: '#F59E0B',
+          },
+          animation: {
+            'float': 'floating 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            floating: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: radial-gradient(circle at top left, #fdf2f8, #f5f3ff, #ecfeff);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.15), 0 10px 10px -5px rgba(236, 72, 153, 0.1);
+    }
+    .code-editor-font {
+      font-family: 'Consolas', 'Courier New', monospace;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c084fc;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9333ea;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Header & Navigation -->
+  <header class="sticky top-0 z-50 glass-card shadow-sm border-b border-purple-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-purple-200">
+          <i class="fa-solid fa-laptop-code text-xl animate-pulse"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-extrabold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
+            منصة حاسوبي المبدع
+          </h1>
+          <p class="text-xs text-purple-600 font-semibold">مادة الحاسوب • الصف الثاني عشر • البيسك المرئي 2008</p>
+        </div>
+      </div>
+
+      <!-- Nav Links -->
+      <nav class="hidden md:flex items-center gap-2">
+        <a href="#welcome" class="px-3 py-1.5 rounded-xl text-sm font-bold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">الرئيسية</a>
+        <a href="#chapter1" class="px-3 py-1.5 rounded-xl text-sm font-bold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">الفصل 1: مفاهيم البرمجة</a>
+        <a href="#languages" class="px-3 py-1.5 rounded-xl text-sm font-bold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">أقسام اللغات</a>
+        <a href="#chapter2" class="px-3 py-1.5 rounded-xl text-sm font-bold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">الفصل 2: الواجهة والمزايا</a>
+        <a href="#simulator" class="px-3 py-1.5 rounded-xl text-sm font-bold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">المحاكي التفاعلي</a>
+        <a href="#quiz" class="px-4 py-1.5 rounded-xl text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md shadow-pink-200 hover:opacity-95 transition">
+          <i class="fa-solid fa-wand-magic-sparkles ml-1"></i> التحدي المعرفي
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+    <!-- Section 1: Welcome Hero Banner -->
+    <section id="welcome" class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-500 text-white p-8 md:p-12">
+      <!-- Decorative circles -->
+      <div class="absolute -top-12 -left-12 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+      <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-pink-400/20 rounded-full blur-2xl"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8 space-y-4">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold tracking-wide border border-white/30 text-pink-100">
+            <i class="fa-solid fa-graduation-cap"></i> منهاج الصف 12 - الباب الأول
+          </span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight">
+            مرحباً بكِ يا صانعة المستقبل في عالم <span class="text-yellow-300 underline decoration-wavy decoration-pink-300">البرمجة والبيسك المرئي</span>! 🌸
+          </h2>
+          <p class="text-purple-100 text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
+            البرامج هي الروح الحقيقية للحاسوب، فبدونها لا يمكن للأجهزة أن تعمل! استكشفي معنا رحلة تطور لغات البرمجة من الصفر والواحد حتى لغات النوافذ المبهجة التي تبتكرين بها أفكارك الرائعة.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3">
+            <a href="#simulator" class="bg-white text-purple-700 hover:bg-yellow-300 hover:text-purple-900 transition px-6 py-3 rounded-2xl font-bold shadow-lg flex items-center gap-2">
+              <i class="fa-solid fa-play"></i> تجربة واجهة الفيجوال بيسك
+            </a>
+            <a href="#quiz" class="bg-purple-900/40 hover:bg-purple-900/60 border border-white/20 px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2">
+              <i class="fa-solid fa-star text-yellow-300"></i> اختبار البطلات الذكي
+            </a>
+          </div>
+        </div>
+        
+        <div class="lg:col-span-4 flex justify-center">
+          <div class="relative w-64 h-64 sm:w-72 sm:h-72 bg-gradient-to-b from-white/20 to-transparent rounded-full p-4 flex items-center justify-center animate-float">
+            <!-- Cartoon Illustration of student programmer -->
+            <div class="w-full h-full bg-white rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center text-center relative border-4 border-pink-200">
+              <span class="text-6xl mb-2">👩‍💻✨</span>
+              <div class="bg-pink-100 text-pink-700 font-extrabold px-3 py-1 rounded-full text-xs mb-1">
+                مبرمجة الغد الواعدة
+              </div>
+              <p class="text-xs text-slate-500 font-medium">"بدونكِ لا يستطيع الحاسوب القيام بأي مهمة!"</p>
+              <div class="mt-3 flex items-center gap-1.5 text-xs text-purple-700 font-bold bg-purple-50 px-3 py-1.5 rounded-lg border border-purple-200">
+                <i class="fa-solid fa-code"></i> Visual Basic 2008
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Chapter 1 - Concepts -->
+    <section id="chapter1" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-pink-500 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-pink-200">
+          ١
+        </div>
+        <div>
+          <h2 class="text-2xl font-black text-slate-800">الفصل الأول: مفاهيم أساسية في البرمجة</h2>
+          <p class="text-sm text-slate-500">اللبنات الأساسية التي يحتاجها كل مبتكر في عالم البرمجيات</p>
+        </div>
+      </div>
+
+      <!-- Dialogue & Definitions Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Interactive Dialogue Card -->
+        <div class="glass-card rounded-3xl p-6 shadow-sm border border-pink-100 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold bg-pink-100 text-pink-700 px-3 py-1 rounded-full">
+                <i class="fa-regular fa-comments ml-1"></i> الحوار الذكي من كتابك المدرسي
+              </span>
+              <span class="text-xs text-slate-400 font-semibold">تأملي معي!</span>
+            </div>
+            
+            <!-- Dialogue Balloons -->
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
+                  👨‍💼
+                </div>
+                <div class="bg-purple-100/70 p-3.5 rounded-2xl rounded-tr-none text-sm text-purple-950 font-medium border border-purple-200">
+                  <span class="font-extrabold block text-xs text-purple-700 mb-1">مبرمج الحاسوب (Programmer):</span>
+                  "الحمد لله! قد جهّزت التعليمات المنطقية التي يحتاجها الحاسوب لحساب مساحة أي شكل هندسي."
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 flex-row-reverse">
+                <div class="w-10 h-10 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
+                  💻
+                </div>
+                <div class="bg-teal-50 p-3.5 rounded-2xl rounded-tl-none text-sm text-teal-950 font-medium border border-teal-200">
+                  <span class="font-extrabold block text-xs text-teal-700 mb-1">الحاسوب الذكي:</span>
+                  "شكراً لك يا مبرمجي العزيز! فبدونك وبدون تعليماتك البرمجية لا أستطيع القيام بأي عمل إطلاقاً."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100">
+            <h4 class="text-sm font-bold text-purple-900 flex items-center gap-2 mb-1">
+              <i class="fa-solid fa-lightbulb text-yellow-500"></i> ماذا نستنتج؟
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>البرنامج (Program):</strong> هو مجموعة من التعليمات المنطقية التي يوجه المبرمج بها الحاسوب للقيام بمهمة محددة (مثل: حسابات، رسم، طباعة).
+              <br>
+              <strong>مبرمج الحاسوب:</strong> هو الشخص المبدع الذي يكتب هذه التعليمات.
+            </p>
+          </div>
+        </div>
+
+        <!-- Programming Language Definition & Importance -->
+        <div class="glass-card rounded-3xl p-6 shadow-sm border border-purple-100 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">
+                <i class="fa-solid fa-book-bookmark"></i>
+              </div>
+              <h3 class="font-extrabold text-slate-800 text-lg">تعريف لغة البرمجة وأهميتها الوطنية</h3>
+            </div>
+            
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">
+              <span class="font-bold text-purple-700">لغة البرمجة:</span> هي أداة متخصصة تساعدنا على بناء وتطوير البرامج بجميع أنواعها ومجالاتها.
+            </p>
+
+            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">لماذا نتعلم لغات البرمجة؟ (الأهمية):</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div class="p-3 rounded-2xl bg-white border border-slate-100 shadow-sm text-center">
+                <div class="w-8 h-8 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-1 text-sm font-bold">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800 mb-0.5">الاستقلالية وسرية البيانات</h5>
+                <p class="text-[11px] text-slate-500">هدف وطني لضمان أمن المعلومات للدولة.</p>
+              </div>
+
+              <div class="p-3 rounded-2xl bg-white border border-slate-100 shadow-sm text-center">
+                <div class="w-8 h-8 mx-auto rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mb-1 text-sm font-bold">
+                  <i class="fa-solid fa-city"></i>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800 mb-0.5">تلبية الاحتياجات المحلية</h5>
+                <p class="text-[11px] text-slate-500">تغطية متطلبات المجتمع التي تعجز عنها البرامج العامة.</p>
+              </div>
+
+              <div class="p-3 rounded-2xl bg-white border border-slate-100 shadow-sm text-center">
+                <div class="w-8 h-8 mx-auto rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-1 text-sm font-bold">
+                  <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800 mb-0.5">صناعة البرمجيات والدخل</h5>
+                <p class="text-[11px] text-slate-500">تأهيل الكفاءات، فصناعة البرمجيات مصدر دخل قومي رائد.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-purple-100 flex items-center justify-between text-xs text-purple-700 font-bold">
+            <span>✨ لغة البرمجة = جسر تفاهم بين عقل الإنسان وعتاد الآلة</span>
+            <i class="fa-solid fa-heart text-pink-500"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Hierarchy of Programming Languages -->
+    <section id="languages" class="space-y-6">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-extrabold rounded-full">شجرة العائلة البرمجية</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-800">أقسام لغات البرمجة الرئيسية</h2>
+        <p class="text-sm text-slate-500">تنقسم لغات البرمجة حسب قربها وبعدها عن فهم الإنسان إلى مستويين رئيسيين:</p>
+      </div>
+
+      <!-- Languages Visual Interactive Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Low Level Languages Card -->
+        <div class="glass-card rounded-3xl p-6 border-2 border-red-200/80 shadow-md relative overflow-hidden">
+          <div class="absolute -top-10 -left-10 w-32 h-32 bg-red-100 rounded-full blur-xl opacity-60"></div>
+          
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-2xl bg-red-500 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                  <i class="fa-solid fa-microchip"></i>
+                </span>
+                <div>
+                  <h3 class="text-lg font-black text-red-900">لغات المستوى الأدنى (Low-Level)</h3>
+                  <p class="text-xs text-red-600 font-semibold">سميت بذلك لبعدها عن لغة الإنسان وقربها من عتاد الآلة</p>
+                </div>
+              </div>
+              <span class="text-xs bg-red-100 text-red-800 font-bold px-2.5 py-1 rounded-lg">صعبة جداً</span>
+            </div>
+
+            <!-- Subtypes: Machine & Assembly -->
+            <div class="space-y-3 pt-2">
+              
+              <!-- 1. Machine Language -->
+              <div class="p-4 rounded-2xl bg-white border border-red-100 shadow-sm transition hover:border-red-300">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-md bg-red-100 text-red-600 inline-flex items-center justify-center text-xs font-extrabold">أ</span>
+                    لغة الآلة (Machine Language)
+                  </span>
+                  <span class="text-xs text-slate-400 font-mono">01001000</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                  هي اللغة الأم والأساسية لعتاد الحاسوب، وتعتمد كلياً على أرقام النظام الثنائي <strong class="text-red-600 font-mono text-sm">(0 و 1)</strong> فقط!
+                </p>
+                <div class="bg-slate-900 text-emerald-400 p-2.5 rounded-xl font-mono text-xs flex justify-between items-center" dir="ltr">
+                  <span class="font-mono text-left">5 = 00000101 (Binary)</span>
+                  <span class="text-[10px] text-slate-400 font-sans" dir="rtl">تحتاج ذاكرة خيالية لحفظ تركيباتها!</span>
+                </div>
+              </div>
+
+              <!-- 2. Assembly Language -->
+              <div class="p-4 rounded-2xl bg-white border border-red-100 shadow-sm transition hover:border-red-300">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-md bg-red-100 text-red-600 inline-flex items-center justify-center text-xs font-extrabold">ب</span>
+                    لغة التجميع (Assembly Language)
+                  </span>
+                  <span class="text-xs text-slate-400 font-mono" dir="ltr">ADD, SUB, INT</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                  لغة تعتمد على اختصارات نصية مع الأرقام (مثل: <code class="bg-slate-100 px-1 py-0.5 rounded text-purple-700 font-mono" dir="ltr">ADD</code> للجمع، و <code class="bg-slate-100 px-1 py-0.5 rounded text-purple-700 font-mono" dir="ltr">INT</code> للمقاطعة).
+                </p>
+                <div class="bg-amber-50 border border-amber-200 text-amber-900 p-2.5 rounded-xl text-xs flex items-center gap-2">
+                  <i class="fa-solid fa-arrows-split-up-and-left text-amber-600"></i>
+                  <span><strong>المترجم (Interpreter / Assembler):</strong> تحتاجه لترجمة اختصاراتها إلى لغة الآلة (0 و 1) لكي يفهمها الحاسوب.</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- High Level Languages Card -->
+        <div class="glass-card rounded-3xl p-6 border-2 border-emerald-200/80 shadow-md relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-100 rounded-full blur-xl opacity-60"></div>
+          
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+                <div>
+                  <h3 class="text-lg font-black text-emerald-950">لغات المستوى الأعلى (High-Level)</h3>
+                  <p class="text-xs text-emerald-700 font-semibold">سميت بذلك لقربها الكبير من لغة الإنسان وتعبيراته الطبيعية</p>
+                </div>
+              </div>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-lg">سهلة وسريعة</span>
+            </div>
+
+            <!-- Subtypes: Script/Textual & Visual -->
+            <div class="space-y-3 pt-2">
+
+              <!-- 1. Script/Textual Languages -->
+              <div class="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm transition hover:border-emerald-300">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-md bg-emerald-100 text-emerald-600 inline-flex items-center justify-center text-xs font-extrabold">أ</span>
+                    لغات البرمجة النصية (Textual / Script)
+                  </span>
+                  <span class="text-xs text-purple-600 font-bold font-mono" dir="ltr">BASIC, C</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                  تعتمد على عبارات إنجليزية اصطلاحية مثل (<code class="text-indigo-600 font-mono" dir="ltr">INPUT, PRINT</code>). سهلة للمبرمج لكنها غير مألوفة للمستخدم البسيط لافتقارها للواجهات الرسومية.
+                </p>
+                <div class="bg-blue-950 text-blue-100 p-2.5 rounded-xl font-mono text-xs text-left" dir="ltr">
+                  <span class="text-yellow-300">10 INPUT n</span> &rarr; <span class="text-pink-300">20 m = n * 0.5</span> &rarr; <span class="text-emerald-300">30 PRINT p</span>
+                </div>
+              </div>
+
+              <!-- 2. Visual Languages -->
+              <div class="p-4 rounded-2xl bg-gradient-to-tr from-purple-50 to-pink-50 border-2 border-purple-300 shadow-sm transition hover:border-purple-400">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-bold text-sm text-purple-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-md bg-purple-600 text-white inline-flex items-center justify-center text-xs font-extrabold">ب</span>
+                    لغات البرمجة المرئية (Visual Languages)
+                  </span>
+                  <span class="text-xs bg-pink-500 text-white font-bold px-2 py-0.5 rounded-full">نجمتنا: VB 2008</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed mb-2">
+                  تبني برامج ذات <strong>واجهة رسومية تفاعلية (GUI)</strong> بمكونات كالنماذج والأزرار وصناديق النصوص، وتستجيب للأحداث بيسر للمستخدم العادي!
+                </p>
+                <div class="bg-white p-2.5 rounded-xl border border-purple-200 text-xs flex items-center justify-between text-purple-800 font-semibold">
+                  <span>✨ تصميم سهل بنظام السحب والإفلات وتخصيص الخصائص</span>
+                  <i class="fa-solid fa-sparkles text-pink-500"></i>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Interactive Comparison: Script vs Visual -->
+      <div class="glass-card rounded-3xl p-6 shadow-sm border border-slate-200 overflow-x-auto">
+        <h4 class="font-extrabold text-slate-800 text-base mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-code-compare text-purple-600"></i>
+          مقارنة حية: بين بيئة البرمجة النصية (DOS / QuickBasic) وبيئة بيسك المرئي (Visual Basic)
+        </h4>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Textual Demo Screen -->
+          <div class="rounded-2xl bg-blue-950 p-4 text-white font-mono text-xs border border-blue-900 shadow-inner">
+            <div class="flex items-center justify-between pb-2 mb-3 border-b border-blue-800 text-blue-300 font-sans">
+              <span>🔵 شاشة Quick Basic (برمجة نصية)</span>
+              <span>شاشة زرقاء قديمة</span>
+            </div>
+            <!-- Code container strictly LTR and left-aligned -->
+            <div class="space-y-1.5 text-blue-200 text-left font-mono" dir="ltr">
+              <p><span class="text-yellow-400">10 INPUT</span> "Enter Purchase Price: ", n</p>
+              <p><span class="text-yellow-400">20 m =</span> n * 0.5 <span class="text-slate-400 font-sans" dir="rtl">' حساب هامش الربح</span></p>
+              <p><span class="text-yellow-400">30 p =</span> m + n <span class="text-slate-400 font-sans" dir="rtl">' حساب سعر البيع</span></p>
+              <p><span class="text-yellow-400">40 PRINT</span> "Selling Price is: "; p</p>
+              <p><span class="text-yellow-400">50 END</span></p>
+            </div>
+            <div class="mt-4 pt-2 border-t border-blue-800/80 text-[11px] text-amber-300 font-sans">
+              ⚠️ الملاحظة: نصية بحتة وصعبة للمستخدم العادي الذي يفضل النقر على أزرار واضحة.
+            </div>
+          </div>
+
+          <!-- Visual Basic Demo Screen -->
+          <div class="rounded-2xl bg-slate-100 p-4 border border-slate-300 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 text-slate-700 font-bold text-xs">
+              <span class="flex items-center gap-1.5"><i class="fa-brands fa-windows text-blue-600"></i> برنامج تسعير المنتجات (Visual Basic 2008)</span>
+              <span class="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded text-[10px]">واجهة رسومية جذابة</span>
+            </div>
+            
+            <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-2.5">
+              <div class="flex items-center justify-between text-xs">
+                <label class="font-bold text-slate-700">سعر الشراء:</label>
+                <input id="sampleBuyPrice" type="number" value="10" class="w-28 px-2 py-1 text-xs border border-purple-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 text-center font-bold" />
+              </div>
+              <div class="text-center">
+                <button onclick="calculateDemoPrice()" class="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-xs font-bold py-1.5 px-4 rounded-xl shadow-md transition transform active:scale-95">
+                  احسب سعر البيع
+                </button>
+              </div>
+              <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-100">
+                <label class="font-bold text-slate-700">سعر البيع الناتج:</label>
+                <div id="sampleSellResult" class="w-28 px-2 py-1 bg-purple-50 border border-purple-200 rounded-lg text-center font-black text-purple-700 text-xs">
+                  15 د.ك
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-2 text-[11px] text-emerald-800 font-medium">
+              ✅ الملاحظة: واجهة رسومية مريحة تعتمد على مدخلات واضحة وزر استجابة للأحداث!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Visual Basic 2008 Features & Start Page -->
+    <section id="chapter2" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-purple-200">
+          ٢
+        </div>
+        <div>
+          <h2 class="text-2xl font-black text-slate-800">الفصل الثاني: واجهة البيسك المرئي Visual Basic 2008</h2>
+          <p class="text-sm text-slate-500">أداة تطوير وتصميم تطبيقات ويندوز والويب والهواتف الذكية</p>
+        </div>
+      </div>
+
+      <!-- Definition of VB 2008 -->
+      <div class="glass-card rounded-3xl p-6 bg-gradient-to-br from-indigo-50/60 to-purple-50/60 border border-indigo-100 shadow-sm flex flex-col md:flex-row items-center gap-6">
+        <div class="w-16 h-16 rounded-3xl bg-indigo-600 text-white flex items-center justify-center text-3xl shadow-xl shadow-indigo-200 flex-shrink-0">
+          <i class="fa-solid fa-gem"></i>
+        </div>
+        <div>
+          <span class="text-xs font-black text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full uppercase tracking-wider">التعريف الوزاري المعتمد</span>
+          <h3 class="text-lg font-black text-slate-800 mt-1 mb-1">ما هو البيسك المرئي 2008 (Visual Basic 2008)؟</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            هو <strong>أداة تطوير برمجية متقدمة</strong>، يمكن من خلالها بناء تطبيقات متنوعة <span class="text-purple-700 font-bold">تستجيب للأحداث (Event-Driven)</span>؛ لنظم تشغيل النوافذ (Windows)، أو مواقع الإنترنت، أو أجهزة الحاسوب الكفية والهواتف الذكية.
+          </p>
+        </div>
+      </div>
+
+      <!-- 5 Key Features of VB 2008 -->
+      <div>
+        <h3 class="text-lg font-black text-slate-800 mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-star text-amber-500"></i>
+          المزايا الخمس الرئيسية للبيسك المرئي 2008:
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          
+          <!-- Feature 1 -->
+          <div class="glass-card rounded-3xl p-5 border border-purple-100 shadow-sm glass-card-hover flex flex-col justify-between text-center">
+            <div>
+              <div class="w-12 h-12 mx-auto rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-3">
+                <i class="fa-solid fa-comment-dots"></i>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-800 mb-1.5">١. تعليمات سهلة الفهم</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                أوامرها تشبه اللغة الإنجليزية مثل:
+                <br>
+                <code class="text-purple-700 font-bold bg-purple-50 px-2 py-0.5 rounded mt-1 inline-block font-mono" dir="ltr">If ... Then</code>
+                <br>
+                (إذا كان الشرط محققاً ... نفّذ).
+              </p>
+            </div>
+            <span class="mt-3 text-[10px] text-purple-600 font-bold bg-purple-50 py-1 rounded-lg">قريبة للإنسان</span>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="glass-card rounded-3xl p-5 border border-pink-100 shadow-sm glass-card-hover flex flex-col justify-between text-center">
+            <div>
+              <div class="w-12 h-12 mx-auto rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center text-xl mb-3">
+                <i class="fa-solid fa-shapes"></i>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-800 mb-1.5">٢. كائنات رسومية</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                تعتمد على أدوات جاهزة لتسهيل الاتصال بالمستخدم مثل الأزرار والقوائم:
+                <br>
+                <span class="text-pink-600 font-semibold font-mono" dir="ltr">(Button, CheckBox)</span>
+              </p>
+            </div>
+            <span class="mt-3 text-[10px] text-pink-600 font-bold bg-pink-50 py-1 rounded-lg">تفاعل مرئي ممتع</span>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="glass-card rounded-3xl p-5 border border-blue-100 shadow-sm glass-card-hover flex flex-col justify-between text-center">
+            <div>
+              <div class="w-12 h-12 mx-auto rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-3">
+                <i class="fa-solid fa-hand-pointer"></i>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-800 mb-1.5">٣. الاستجابة للأحداث</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                يتم تنفيذ التعليمات بعد قيام المستخدم بفعل محدد، مثل:
+                <br>
+                <strong>الضغط على زر خروج (Click Event).</strong>
+              </p>
+            </div>
+            <span class="mt-3 text-[10px] text-blue-600 font-bold bg-blue-50 py-1 rounded-lg">Event-Driven</span>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="glass-card rounded-3xl p-5 border border-emerald-100 shadow-sm glass-card-hover flex flex-col justify-between text-center">
+            <div>
+              <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-3">
+                <i class="fa-solid fa-spell-check"></i>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-800 mb-1.5">٤. سهولة اكتشاف الأخطاء</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                عند الخطأ في كتابة كلمة يظهر <span class="text-red-500 underline decoration-wavy font-bold">خط متعرج</span> فوراً لتنبيه المبرمج وتصحيحه.
+              </p>
+            </div>
+            <span class="mt-3 text-[10px] text-emerald-700 font-bold bg-emerald-50 py-1 rounded-lg">مساعد ذكي فوري</span>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="glass-card rounded-3xl p-5 border border-amber-100 shadow-sm glass-card-hover flex flex-col justify-between text-center">
+            <div>
+              <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-3">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-800 mb-1.5">٥. تنوع التطبيقات</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                بناء تطبيقات مختلفة:
+                <br>
+                أ) تطبيقات النوافذ (Windows).
+                <br>
+                ب) الويب ومواقع الإنترنت.
+                <br>
+                ج) تطبيقات الأجهزة الذكية.
+              </p>
+            </div>
+            <span class="mt-3 text-[10px] text-amber-700 font-bold bg-amber-50 py-1 rounded-lg">شامل ومتعدد المنصات</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Start Page & Project Loading Detailed Explanation -->
+      <div class="glass-card rounded-3xl p-6 border border-purple-100 shadow-sm space-y-6">
+        <div>
+          <span class="text-xs font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-full">تشغيل البرنامج وشاشته الأولى</span>
+          <h3 class="text-xl font-black text-slate-800 mt-2">عناصر صفحة البدء (Start Page) الأربعة</h3>
+          <p class="text-xs text-slate-500 mt-1">عند تشغيل Visual Basic تظهر صفحة البدء مقسمة إلى أربعة أقسام أساسية لكل منها وظيفة محددة:</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Part 1 -->
+          <div class="p-4 rounded-2xl bg-gradient-to-b from-purple-50 to-white border border-purple-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="w-7 h-7 rounded-lg bg-purple-600 text-white font-extrabold text-xs flex items-center justify-center">1</span>
+                <i class="fa-solid fa-clock-rotate-left text-purple-500"></i>
+              </div>
+              <h4 class="font-bold text-slate-800 text-sm mb-1">المشاريع الأخيرة (Recent Projects)</h4>
+              <ul class="text-xs text-slate-600 space-y-1">
+                <li>• عرض آخر المشاريع المفتوحة مؤخراً لفتحها بسرعة.</li>
+                <li>• خيار <span class="font-mono text-purple-700 font-bold">Open Project</span> لفتح مشروع محفوظ.</li>
+                <li>• خيار <span class="font-mono text-pink-700 font-bold">Create Project</span> لإنشاء مشروع جديد.</li>
+              </ul>
+            </div>
+            <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded text-center mt-3 font-semibold">الأكثر استخداماً</span>
+          </div>
+
+          <!-- Part 2 -->
+          <div class="p-4 rounded-2xl bg-gradient-to-b from-pink-50 to-white border border-pink-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="w-7 h-7 rounded-lg bg-pink-600 text-white font-extrabold text-xs flex items-center justify-center">2</span>
+                <i class="fa-solid fa-compass text-pink-500"></i>
+              </div>
+              <h4 class="font-bold text-slate-800 text-sm mb-1">دعنا نبدأ (Getting Started)</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                تقدم نصائح وإرشادات ومعلومات مبسطة جداً للمستخدمين المبتدئين في استخدام وتعلّم الفيجوال بيسك.
+              </p>
+            </div>
+            <span class="text-[10px] text-pink-700 bg-pink-100 px-2 py-0.5 rounded text-center mt-3 font-semibold">دليل المبتدئة</span>
+          </div>
+
+          <!-- Part 3 -->
+          <div class="p-4 rounded-2xl bg-gradient-to-b from-blue-50 to-white border border-blue-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center">3</span>
+                <i class="fa-solid fa-newspaper text-blue-500"></i>
+              </div>
+              <h4 class="font-bold text-slate-800 text-sm mb-1">الأخبار (News)</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                تظهر آخر المستجدات وأخبار تحديثات لغة البيسك المرئي ومجتمع المطورين وتُحدّث تلقائياً أثناء الاتصال بالإنترنت.
+              </p>
+            </div>
+            <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded text-center mt-3 font-semibold">تتطلب إنترنت</span>
+          </div>
+
+          <!-- Part 4 -->
+          <div class="p-4 rounded-2xl bg-gradient-to-b from-teal-50 to-white border border-teal-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="w-7 h-7 rounded-lg bg-teal-600 text-white font-extrabold text-xs flex items-center justify-center">4</span>
+                <i class="fa-solid fa-bullhorn text-teal-500"></i>
+              </div>
+              <h4 class="font-bold text-slate-800 text-sm mb-1">إعلانات (Headlines)</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                روابط إنترنت تحتوي على رؤوس مواضيع وإعلانات حصرية خاصة بشركة مايكروسوفت ومجتمع Visual Basic.
+              </p>
+            </div>
+            <span class="text-[10px] text-teal-700 bg-teal-100 px-2 py-0.5 rounded text-center mt-3 font-semibold">تتطلب إنترنت</span>
+          </div>
+        </div>
+
+        <!-- Project Definition & Open Project Steps -->
+        <div class="p-5 rounded-2xl bg-purple-50/70 border border-purple-200 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <div class="md:col-span-4">
+            <span class="text-xs font-black text-purple-700 bg-purple-200/60 px-2.5 py-1 rounded-md">مفهوم مهم جداً</span>
+            <h4 class="text-base font-extrabold text-purple-950 mt-1">ما هو المشروع (Project)؟</h4>
+            <p class="text-xs text-purple-900 mt-1 leading-relaxed">
+              المشروع هو <strong>البرنامج أثناء مرحلة التصميم</strong>. ويتم حفظه بامتداد الحل الشهير <code class="bg-white px-2 py-0.5 rounded text-pink-600 font-bold">.sln</code> (Solution).
+            </p>
+          </div>
+
+          <div class="md:col-span-8 bg-white p-4 rounded-xl border border-purple-200 space-y-2">
+            <h5 class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <i class="fa-regular fa-folder-open text-amber-500"></i> خطوات فتح مشروع تم إنشاؤه مسبقاً:
+            </h5>
+            <ol class="text-xs text-slate-600 space-y-1 list-decimal list-inside">
+              <li>إذا كان ظاهراً في قائمة <strong>Recent Projects</strong> نضغط على اسمه مباشرة.</li>
+              <li>أو نضغط على <strong>Open Project</strong> من جزء المشاريع الأخيرة أو من قائمة <strong>File &rarr; Open Project</strong>.</li>
+              <li>نحدد المجلد الحاوي للمشروع (مثل: مجلد تدريبات &rarr; <span class="font-mono text-purple-700">My First</span>).</li>
+              <li>نحدد ملف المشروع ذي الامتداد <span class="font-mono text-pink-600 font-bold">.sln</span> ثم نضغط زر <strong>Open</strong>.</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 5: The Big Three Interface Windows & Auto Hide Simulator -->
+    <section id="simulator" class="space-y-6">
+      <div class="text-center max-w-3xl mx-auto space-y-2">
+        <span class="px-3.5 py-1.5 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 text-xs font-extrabold rounded-full border border-purple-200">
+          🎮 معمل التجربة والمحاكاة العملية
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-800">
+          محاكي واجهة البيسك المرئي 2008 التفاعلي
+        </h2>
+        <p class="text-sm text-slate-500">
+          جربي بنفسكِ التحكم في النوافذ الثلاث الرئيسية، واستخدمي دبوس التثبيت (Auto Hide) وغيّري نص الزر ولاحظي انعكاسه الفوري!
+        </p>
+      </div>
+
+      <!-- Controls Info Bar -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-center gap-3 shadow-sm">
+          <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">1</div>
+          <div>
+            <h5 class="font-bold text-slate-800">صندوق الأدوات (Toolbox)</h5>
+            <p class="text-slate-500 text-[11px]">يحتوي كائنات النموذج مثل Common Controls. إظهاره من قائـمة View.</p>
+          </div>
+        </div>
+        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-center gap-3 shadow-sm">
+          <div class="w-8 h-8 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center font-bold">2</div>
+          <div>
+            <h5 class="font-bold text-slate-800">نافذة الخصائص (Properties)</h5>
+            <p class="text-slate-500 text-[11px]">لضبط أوصاف الكائن (نص Text، ولون وخط). إظهاره من View أو F4.</p>
+          </div>
+        </div>
+        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-center gap-3 shadow-sm">
+          <div class="w-8 h-8 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold">3</div>
+          <div>
+            <h5 class="font-bold text-slate-800">مستكشف الحل (Solution Explorer)</h5>
+            <p class="text-slate-500 text-[11px]">يعرض جميع ملفات ونماذج المشروع (Forms & Modules).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Simulator IDE Window -->
+      <div class="rounded-3xl bg-slate-800 border-4 border-slate-700 shadow-2xl overflow-hidden text-slate-800">
+        
+        <!-- IDE Title Bar -->
+        <div class="bg-slate-900 text-slate-300 px-4 py-2.5 flex items-center justify-between text-xs select-none border-b border-slate-700">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+            <span class="font-bold mr-2 text-white">Microsoft Visual Basic 2008 Express Edition - [تسعير المنتجات]</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="toggleCodeViewer()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-yellow-300 px-2.5 py-1 rounded border border-slate-600 transition" title="عرض محرر كود Visual Basic (Code Window)">
+              <i class="fa-solid fa-code ml-1"></i> عرض نافذة الكود (Code Window)
+            </button>
+            <button onclick="resetIDEWindows()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-purple-300 px-2.5 py-1 rounded border border-slate-600 transition" title="قائمة Window -> Reset Window Layout">
+              <i class="fa-solid fa-arrows-rotate ml-1"></i> إعادة ضبط النوافذ (Reset Layout)
+            </button>
+            <button onclick="toggleAutoHideAll()" id="autoHideAllBtn" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-pink-300 px-2.5 py-1 rounded border border-slate-600 transition" title="قائمة Window -> Auto Hide All">
+              <i class="fa-solid fa-thumbtack ml-1"></i> إخفاء تلقائي للكل (Auto Hide All)
+            </button>
+          </div>
+        </div>
+
+        <!-- IDE Menu Bar -->
+        <div class="bg-slate-100 px-4 py-1.5 flex items-center gap-4 text-xs font-semibold text-slate-700 border-b border-slate-300" dir="ltr">
+          <span class="cursor-pointer hover:text-purple-700">File</span>
+          <span class="cursor-pointer hover:text-purple-700">Edit</span>
+          <span class="text-purple-700 font-bold hover:underline cursor-pointer" onclick="alertMsg('قائمة View تتيح إظهار النوافذ عند إغلاقها مثل Toolbox و Properties!')">View ▾</span>
+          <span class="cursor-pointer hover:text-purple-700">Project</span>
+          <span class="cursor-pointer hover:text-purple-700">Build</span>
+          <span class="cursor-pointer hover:text-purple-700">Debug</span>
+          <span class="cursor-pointer hover:text-purple-700">Format</span>
+          <span class="cursor-pointer hover:text-purple-700">Tools</span>
+          <span class="text-purple-700 font-bold hover:underline cursor-pointer" onclick="alertMsg('قائمة Window تتيح أمرين هامين: Reset Window Layout و Auto Hide All')">Window ▾</span>
+          <span class="cursor-pointer hover:text-purple-700">Help</span>
+        </div>
+
+        <!-- IDE Workspace (3 Panes) -->
+        <div class="grid grid-cols-12 bg-slate-200 min-h-[460px] gap-1 p-1">
+
+          <!-- Left Pane: Toolbox -->
+          <div id="toolboxWindow" class="col-span-12 md:col-span-3 bg-white rounded-xl border border-slate-300 flex flex-col shadow-sm transition-all duration-300">
+            <!-- Window header with Pin -->
+            <div class="bg-slate-100 p-2 rounded-t-xl border-b border-slate-200 flex items-center justify-between text-xs font-bold text-slate-700">
+              <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-toolbox text-purple-600"></i>
+                صندوق الأدوات (Toolbox)
+              </span>
+              <button onclick="togglePin('toolbox')" class="hover:text-purple-600 transition" title="تثبيت أو إخفاء تلقائي (Pin / Auto Hide)">
+                <i id="toolboxPin" class="fa-solid fa-thumbtack text-purple-600 transform rotate-45"></i>
+              </button>
+            </div>
+
+            <!-- Content of Toolbox -->
+            <div id="toolboxBody" class="p-2 space-y-2 text-xs overflow-y-auto max-h-[400px]">
+              <div class="font-bold text-purple-800 flex items-center justify-between cursor-pointer py-1 px-2 bg-purple-50 rounded-lg">
+                <span><i class="fa-solid fa-square-minus ml-1"></i> Common Controls (الأدوات الشائعة)</span>
+              </div>
+              <div class="space-y-1 pr-2 text-slate-600 text-xs">
+                <div class="p-1.5 hover:bg-slate-100 rounded flex items-center gap-2 cursor-pointer border border-transparent hover:border-slate-200">
+                  <i class="fa-regular fa-square"></i>
+                  <span>Pointer (المؤشر)</span>
+                </div>
+                <div class="p-1.5 bg-purple-50 rounded flex items-center gap-2 cursor-pointer font-bold text-purple-700 border border-purple-200">
+                  <i class="fa-solid fa-arrow-pointer"></i>
+                  <span>Button (زر الأمر - محدد)</span>
+                </div>
+                <div class="p-1.5 hover:bg-slate-100 rounded flex items-center gap-2 cursor-pointer">
+                  <i class="fa-regular fa-square-check"></i>
+                  <span>CheckBox (صندوق اختيار)</span>
+                </div>
+                <div class="p-1.5 hover:bg-slate-100 rounded flex items-center gap-2 cursor-pointer">
+                  <i class="fa-regular fa-font"></i>
+                  <span>Label (عنوان)</span>
+                </div>
+                <div class="p-1.5 hover:bg-slate-100 rounded flex items-center gap-2 cursor-pointer">
+                  <i class="fa-regular fa-keyboard"></i>
+                  <span>TextBox (صندوق نص)</span>
+                </div>
+              </div>
+
+              <div class="font-bold text-slate-600 flex items-center justify-between cursor-pointer py-1 px-2 hover:bg-slate-100 rounded-lg">
+                <span><i class="fa-solid fa-square-plus ml-1"></i> Dialogs (صناديق الحوار)</span>
+              </div>
+              <div class="font-bold text-slate-600 flex items-center justify-between cursor-pointer py-1 px-2 hover:bg-slate-100 rounded-lg">
+                <span><i class="fa-solid fa-square-plus ml-1"></i> Printing (كائنات الطباعة)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Pane: Design Form OR Code Window -->
+          <div class="col-span-12 md:col-span-6 bg-slate-300/80 rounded-xl p-3 flex flex-col items-center justify-center relative overflow-hidden">
+            
+            <!-- Tab Indicator -->
+            <div class="absolute top-2 right-3 text-[11px] font-bold text-slate-600 bg-white/80 px-2.5 py-1 rounded-md shadow-sm flex items-center gap-2">
+              <span id="tabLabelDesign" class="text-purple-700 cursor-pointer font-bold underline" onclick="showDesignTab()">
+                <i class="fa-solid fa-paint-roller ml-1"></i> Form1.vb [Design]
+              </span>
+              <span class="text-slate-400">|</span>
+              <span id="tabLabelCode" class="text-slate-500 cursor-pointer hover:text-purple-700" onclick="showCodeTab()">
+                <i class="fa-solid fa-code ml-1"></i> Form1.vb [Code]
+              </span>
+            </div>
+
+            <!-- 1. Virtual VB Form Window (Design view) -->
+            <div id="formDesignContainer" class="w-full max-w-sm bg-slate-100 rounded-xl shadow-xl border-2 border-slate-400 overflow-hidden text-right">
+              <!-- Form Title -->
+              <div class="bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-3 py-1.5 text-xs font-bold flex items-center justify-between">
+                <span>برنامج تسعير المنتجات</span>
+                <div class="flex items-center gap-1.5 text-[10px]">
+                  <span class="w-3 h-3 bg-white/20 rounded flex items-center justify-center">_</span>
+                  <span class="w-3 h-3 bg-white/20 rounded flex items-center justify-center">□</span>
+                  <span class="w-3 h-3 bg-red-500 rounded flex items-center justify-center">×</span>
+                </div>
+              </div>
+
+              <!-- Form Body & Components -->
+              <div class="p-4 space-y-3.5 bg-slate-50">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">سعر الشراء:</label>
+                  <input id="formInputBuy" type="number" value="50" oninput="runVisualBasicCalc()" class="w-full px-2 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-purple-500 font-mono text-center">
+                </div>
+
+                <!-- Interactive Button being styled by Properties Window -->
+                <div class="text-center pt-1">
+                  <button id="formDynamicButton" onclick="runVisualBasicCalc()" class="w-full py-2 px-3 rounded-lg text-xs font-bold shadow transition bg-purple-600 text-white hover:bg-purple-700 active:scale-95 border-2 border-purple-400">
+                    احسب سعر البيع
+                  </button>
+                  <span class="block text-[10px] text-purple-600 font-semibold mt-1">كائن: Button1 (انقري عليه لتنفيذ الحدث)</span>
+                </div>
+
+                <div class="pt-2 border-t border-slate-200">
+                  <label class="block text-xs font-bold text-slate-700 mb-1">سعر البيع المقدر:</label>
+                  <div id="formOutputSell" class="w-full py-1.5 px-2 bg-emerald-50 border border-emerald-300 rounded text-center font-bold text-emerald-800 text-xs">
+                    75 دينار (هامش ربح 50%)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Code Window (LTR / Left-Aligned Code Editor View) -->
+            <div id="codeWindowContainer" class="hidden w-full max-w-md bg-white rounded-xl shadow-xl border-2 border-slate-400 overflow-hidden text-left" dir="ltr">
+              <div class="bg-slate-800 text-slate-200 px-3 py-1.5 text-xs font-mono flex items-center justify-between border-b border-slate-700">
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-code text-yellow-400"></i> Form1.vb (Code Editor)
+                </span>
+                <span class="text-[10px] text-slate-400">Visual Basic 2008</span>
+              </div>
+              <div class="p-3 bg-slate-900 text-slate-100 font-mono text-xs leading-relaxed overflow-x-auto select-text">
+                <p class="text-blue-400">Public Class <span class="text-teal-300">Form1</span></p>
+                <div class="pl-4 border-l-2 border-slate-700 my-1 space-y-1">
+                  <p class="text-slate-500 italic">' Event: Click on Button1</p>
+                  <p class="text-blue-400">Private Sub <span class="text-yellow-300">Button1_Click</span>(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click</p>
+                  <div class="pl-4 space-y-0.5">
+                    <p><span class="text-blue-400">Dim</span> buyPrice <span class="text-blue-400">As Double</span> = Val(TextBox1.Text)</p>
+                    <p><span class="text-blue-400">Dim</span> margin <span class="text-blue-400">As Double</span> = buyPrice * 0.5</p>
+                    <p><span class="text-blue-400">Dim</span> sellPrice <span class="text-blue-400">As Double</span> = buyPrice + margin</p>
+                    <p class="text-emerald-300">TextBox2.Text = sellPrice.ToString()</p>
+                  </div>
+                  <p class="text-blue-400">End Sub</p>
+                </div>
+                <p class="text-blue-400">End Class</p>
+              </div>
+              <div class="p-2 bg-slate-100 text-[11px] text-slate-600 font-sans text-right" dir="rtl">
+                📝 <strong>كتابة الكود:</strong> تتم دائماً من اليسار لليمين بأوامر واضحة ومفهومة.
+              </div>
+            </div>
+
+            <div class="mt-3 text-center text-xs text-slate-600 font-medium">
+              💡 اضغطي على زر النموذج لتجربة الاستجابة للحدث أو بدّلي لنافذة الكود أعلاه!
+            </div>
+          </div>
+
+          <!-- Right Pane: Solution Explorer & Properties Window -->
+          <div class="col-span-12 md:col-span-3 space-y-2 flex flex-col">
+            
+            <!-- Solution Explorer Window -->
+            <div id="solutionWindow" class="bg-white rounded-xl border border-slate-300 flex flex-col shadow-sm transition-all duration-300">
+              <div class="bg-slate-100 p-2 rounded-t-xl border-b border-slate-200 flex items-center justify-between text-xs font-bold text-slate-700">
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-folder-tree text-indigo-600"></i>
+                  مستكشف الحل (Solution Explorer)
+                </span>
+                <button onclick="togglePin('solution')" title="تثبيت أو إخفاء تلقائي">
+                  <i id="solutionPin" class="fa-solid fa-thumbtack text-indigo-600 transform rotate-45"></i>
+                </button>
+              </div>
+              <div id="solutionBody" class="p-2 text-xs space-y-1">
+                <div class="font-bold text-slate-700 flex items-center gap-1.5">
+                  <i class="fa-regular fa-folder text-amber-500"></i>
+                  <span>Solution 'My First' (1 project)</span>
+                </div>
+                <div class="pr-3 text-slate-600 space-y-1">
+                  <div class="flex items-center gap-1.5 text-purple-700 font-semibold">
+                    <i class="fa-solid fa-window-maximize"></i>
+                    <span>Form1.vb (النموذج النشط)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 hover:text-purple-700 cursor-pointer">
+                    <i class="fa-regular fa-file-code"></i>
+                    <span>Module1.vb (الوحدة النمطية)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Properties Window -->
+            <div id="propertiesWindow" class="bg-white rounded-xl border border-slate-300 flex flex-col shadow-sm flex-grow transition-all duration-300">
+              <div class="bg-slate-100 p-2 rounded-t-xl border-b border-slate-200 flex items-center justify-between text-xs font-bold text-slate-700">
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-sliders text-pink-600"></i>
+                  نافذة الخصائص (Properties)
+                </span>
+                <button onclick="togglePin('properties')" title="تثبيت أو إخفاء تلقائي">
+                  <i id="propertiesPin" class="fa-solid fa-thumbtack text-pink-600 transform rotate-45"></i>
+                </button>
+              </div>
+
+              <div id="propertiesBody" class="p-2 text-xs space-y-2">
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-200 font-bold text-[11px] text-slate-700">
+                  الكائن المحدد: <span class="text-pink-600">Button1 (System.Windows.Forms)</span>
+                </div>
+
+                <!-- Interactive property editing! -->
+                <div class="space-y-2">
+                  <div>
+                    <label class="block font-bold text-slate-700 text-[11px] mb-1">
+                      خاصية النص (Text):
+                    </label>
+                    <input id="propTextInput" type="text" value="احسب سعر البيع" oninput="updateButtonTextFromProperty(this.value)" class="w-full px-2 py-1 text-xs border border-pink-300 rounded focus:ring-1 focus:ring-pink-500 font-bold text-pink-700">
+                    <span class="text-[10px] text-slate-400">غيّري النص هنا ليتغير فوراً على الزر!</span>
+                  </div>
+
+                  <div>
+                    <label class="block font-bold text-slate-700 text-[11px] mb-1">
+                      لون الخلفية (BackColor):
+                    </label>
+                    <select id="propColorSelect" onchange="updateButtonColorFromProperty(this.value)" class="w-full px-2 py-1 text-xs border border-slate-300 rounded font-semibold text-slate-700">
+                      <option value="bg-purple-600">بنفسجي (Purple)</option>
+                      <option value="bg-pink-600">وردي (Pink)</option>
+                      <option value="bg-emerald-600">أخضر (Emerald)</option>
+                      <option value="bg-blue-600">أزرق كلاسيكي (Blue)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mt-2 p-2 bg-pink-50 border border-pink-200 rounded text-[10px] text-pink-900 leading-snug">
+                  📌 <strong>تذكري:</strong> تختلف خصائص الكائن في هذه النافذة حسب الكائن المحدد على شاشة النموذج.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Window Management Explanation Card -->
+      <div class="glass-card rounded-3xl p-6 border border-purple-100 shadow-sm space-y-3">
+        <h4 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-arrows-to-eye text-purple-600"></i> مهارات التحكم في نوافذ الواجهة (معلومات وزارية هامة):
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-600">
+          <div class="p-3 bg-white rounded-xl border border-slate-100 shadow-sm">
+            <strong class="text-purple-700 block mb-1">📌 الإخفاء التلقائي (Auto Hide):</strong>
+            تتمتع جميع النوافذ بهذه الميزة لتوفير مساحة العمل، وتظهر بمجرد مرور مؤشر الفأرة فوق شريط عنوانها. نضغط على رمز دبوس التثبيت لتثبيتها بشكل دائم.
+          </div>
+          <div class="p-3 bg-white rounded-xl border border-slate-100 shadow-sm">
+            <strong class="text-indigo-700 block mb-1">🖐️ السحب والإفلات (Drag & Drop):</strong>
+            في وضع الإظهار الدائم، يمكن سحب أي نافذة من شريط عنوانها ونقلها إلى أي مكان يناسب المبرمجة على الشاشة.
+          </div>
+          <div class="p-3 bg-white rounded-xl border border-slate-100 shadow-sm">
+            <strong class="text-pink-700 block mb-1">🔄 قائمة النافذة (Window):</strong>
+            لإخفاء جميع النوافذ نختار <code class="font-mono text-purple-700">Auto Hide All</code>، وللرجوع للوضع الافتراضي عند تبعثر النوافذ نختار <code class="font-mono text-pink-700">Reset Window Layout</code>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Smart Interactive Quiz & Certificate -->
+    <section id="quiz" class="space-y-6">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="px-3.5 py-1.5 bg-gradient-to-r from-pink-100 to-purple-100 text-pink-700 text-xs font-extrabold rounded-full border border-pink-200">
+          🏆 التحدي المعرفي الفوري
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-800">
+          اختبري معلوماتكِ يا بطلة الحاسوب!
+        </h2>
+        <p class="text-sm text-slate-500">
+          أجيبي عن الأسئلة الخمسة المستخلصة من صميم كتابكِ المدرسي واحفظي شهادة تميزكِ الرقمية فوراً!
+        </p>
+      </div>
+
+      <!-- Quiz Card Container -->
+      <div class="max-w-3xl mx-auto glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-pink-200">
+        
+        <!-- Student Name Bar -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-200">
+          <div class="w-full sm:w-auto flex-grow">
+            <label class="block text-xs font-bold text-slate-700 mb-1">اسم المبرمجة المتميزة:</label>
+            <input id="studentNameInput" type="text" placeholder="اكتبي اسمكِ هنا (مثال: نورة الأحمد)..." class="w-full px-4 py-2 text-sm border border-purple-300 rounded-xl focus:ring-2 focus:ring-purple-400 focus:outline-none font-bold text-purple-900 bg-white">
+          </div>
+          <div class="flex items-center gap-3 bg-purple-50 px-4 py-2 rounded-2xl border border-purple-200">
+            <span class="text-xs font-bold text-purple-700">النتيجة الحالية:</span>
+            <span id="quizScoreDisplay" class="text-xl font-black text-pink-600">0 / 5</span>
+          </div>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="quizQuestionsContainer" class="space-y-6 pt-6">
+
+          <!-- Q1 -->
+          <div class="question-block p-4 rounded-2xl bg-white border border-slate-200 transition hover:border-purple-300" data-correct="1">
+            <h4 class="font-extrabold text-sm text-slate-800 mb-3 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 inline-flex items-center justify-center text-xs">١</span>
+              ما هو تعريف البرنامج (Program) في الحاسوب؟
+            </h4>
+            <div class="grid grid-cols-1 gap-2 text-xs">
+              <button onclick="checkAnswer(this, 1, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                أ) مكون مادي من مكونات الحاسوب الصلبة مثل القرص الصلب.
+              </button>
+              <button onclick="checkAnswer(this, 1, true)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ب) مجموعة من التعليمات المنطقية يوجه بها المبرمج الحاسوب للقيام بمهمة محددة.
+              </button>
+              <button onclick="checkAnswer(this, 1, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ج) شبكة اتصالات تربط بين الحواسيب في جميع أنحاء العالم.
+              </button>
+            </div>
+            <div class="feedback hidden mt-2 text-xs font-bold p-2.5 rounded-xl"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block p-4 rounded-2xl bg-white border border-slate-200 transition hover:border-purple-300" data-correct="2">
+            <h4 class="font-extrabold text-sm text-slate-800 mb-3 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 inline-flex items-center justify-center text-xs">٢</span>
+              تعتمد لغة الآلة (Machine Language) في كتابة تعليماتها على:
+            </h4>
+            <div class="grid grid-cols-1 gap-2 text-xs">
+              <button onclick="checkAnswer(this, 2, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                أ) الرموز الإنجليزية المختصرة مثل (Add و Int).
+              </button>
+              <button onclick="checkAnswer(this, 2, true)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ب) أرقام النظام الثنائي (0 و 1) وهي اللغة الأساسية للعتاد.
+              </button>
+              <button onclick="checkAnswer(this, 2, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ج) الكائنات الرسومية والصور ثلاثية الأبعاد.
+              </button>
+            </div>
+            <div class="feedback hidden mt-2 text-xs font-bold p-2.5 rounded-xl"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block p-4 rounded-2xl bg-white border border-slate-200 transition hover:border-purple-300" data-correct="3">
+            <h4 class="font-extrabold text-sm text-slate-800 mb-3 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 inline-flex items-center justify-center text-xs">٣</span>
+              عند حدوث خطأ كتابي في كود لغة البيسك المرئي 2008، كيف ينبهنا البرنامج؟
+            </h4>
+            <div class="grid grid-cols-1 gap-2 text-xs">
+              <button onclick="checkAnswer(this, 3, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                أ) يتم إغلاق الحاسوب فوراً.
+              </button>
+              <button onclick="checkAnswer(this, 3, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ب) يصدر صوت صفارة حاد من الشاشة.
+              </button>
+              <button onclick="checkAnswer(this, 3, true)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ج) يظهر خط متعرج أسفل الكلمة للتنبيه بوجود خطأ برمجي.
+              </button>
+            </div>
+            <div class="feedback hidden mt-2 text-xs font-bold p-2.5 rounded-xl"></div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="question-block p-4 rounded-2xl bg-white border border-slate-200 transition hover:border-purple-300" data-correct="4">
+            <h4 class="font-extrabold text-sm text-slate-800 mb-3 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 inline-flex items-center justify-center text-xs">٤</span>
+              النافذة التي تظهر بها جميع محتويات المشروع من النماذج Forms والوحدات النمطية هي:
+            </h4>
+            <div class="grid grid-cols-1 gap-2 text-xs">
+              <button onclick="checkAnswer(this, 4, true)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                أ) نافذة مستكشف الحل (Solution Explorer).
+              </button>
+              <button onclick="checkAnswer(this, 4, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ب) نافذة صندوق الأدوات (Toolbox).
+              </button>
+              <button onclick="checkAnswer(this, 4, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ج) نافذة الخصائص (Properties).
+              </button>
+            </div>
+            <div class="feedback hidden mt-2 text-xs font-bold p-2.5 rounded-xl"></div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="question-block p-4 rounded-2xl bg-white border border-slate-200 transition hover:border-purple-300" data-correct="5">
+            <h4 class="font-extrabold text-sm text-slate-800 mb-3 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 inline-flex items-center justify-center text-xs">٥</span>
+              عند الرغبة في إرجاع نوافذ Visual Basic 2008 إلى وضعها الافتراضي بعد تبعثرها، نختار:
+            </h4>
+            <div class="grid grid-cols-1 gap-2 text-xs">
+              <button onclick="checkAnswer(this, 5, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                أ) أمر Save All من قائمة File.
+              </button>
+              <button onclick="checkAnswer(this, 5, true)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ب) أمر Reset Window Layout من قائمة Window.
+              </button>
+              <button onclick="checkAnswer(this, 5, false)" class="quiz-btn text-right p-3 rounded-xl border border-slate-200 hover:bg-purple-50 hover:border-purple-300 transition">
+                ج) أمر Exit من قائمة Edit.
+              </button>
+            </div>
+            <div class="feedback hidden mt-2 text-xs font-bold p-2.5 rounded-xl"></div>
+          </div>
+
+        </div>
+
+        <!-- Certificate Card (Revealed on Completion) -->
+        <div id="certificateCard" class="hidden mt-8 p-6 rounded-3xl bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-500 text-white text-center shadow-2xl relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/20 rounded-full blur-xl"></div>
+          <div class="relative z-10 space-y-3">
+            <span class="text-5xl">🎓👑</span>
+            <h3 class="text-2xl font-black">وسام الإبداع والتفوق الحاسوبي</h3>
+            <p class="text-sm text-purple-100">
+              نبارك للمتعلمة المتميزة: <span id="certStudentName" class="font-extrabold text-yellow-300 underline text-base">بطلة المستقبل</span>
+            </p>
+            <p class="text-xs text-purple-200 max-w-md mx-auto">
+              لاجتيازها بنجاح باهر مراجعة الفصلين الأول والثاني في مادة الحاسوب (مدخل إلى البيسك المرئي 2008). نفخر بكِ وبطموحكِ البرمجي!
+            </p>
+            <div class="pt-2 flex justify-center gap-3">
+              <button onclick="triggerConfettiAgain()" class="bg-yellow-400 hover:bg-yellow-300 text-purple-950 font-bold px-5 py-2 rounded-xl text-xs shadow-md transition flex items-center gap-1.5">
+                <i class="fa-solid fa-cake-candles"></i> احتفال مجدد بالنجاح
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Custom Floating Notification -->
+    <div id="toastNotification" class="fixed bottom-6 left-6 z-50 transform translate-y-32 transition duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-purple-500 text-xs">
+      <i class="fa-solid fa-circle-info text-pink-400 text-base"></i>
+      <span id="toastMsgText">تنبيه ذكي!</span>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white/80 border-t border-purple-100 py-6 mt-12 text-center text-xs text-slate-500 space-y-2">
+    <div class="flex items-center justify-center gap-2 text-purple-600 font-bold text-sm">
+      <i class="fa-solid fa-laptop-code"></i>
+      <span>لوحة التعلم التفاعلية لمتعلمات الصف الثاني عشر</span>
+      <i class="fa-solid fa-heart text-pink-500"></i>
+    </div>
+    <p>تم إعداد وتصميم هذا المحتوى التعليمي وفق منهج الحاسوب لوزارة التربية (الفصل الأول والثاني - مدخل إلى البيسك المرئي 2008)</p>
+  </footer>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Tab switching for IDE simulator (Design vs Code)
+    function showDesignTab() {
+      document.getElementById('formDesignContainer').classList.remove('hidden');
+      document.getElementById('codeWindowContainer').classList.add('hidden');
+      document.getElementById('tabLabelDesign').className = 'text-purple-700 cursor-pointer font-bold underline';
+      document.getElementById('tabLabelCode').className = 'text-slate-500 cursor-pointer hover:text-purple-700';
+    }
+
+    function showCodeTab() {
+      document.getElementById('formDesignContainer').classList.add('hidden');
+      document.getElementById('codeWindowContainer').classList.remove('hidden');
+      document.getElementById('tabLabelCode').className = 'text-purple-700 cursor-pointer font-bold underline';
+      document.getElementById('tabLabelDesign').className = 'text-slate-500 cursor-pointer hover:text-purple-700';
+    }
+
+    function toggleCodeViewer() {
+      const codeContainer = document.getElementById('codeWindowContainer');
+      if (codeContainer.classList.contains('hidden')) {
+        showCodeTab();
+        showToast('تم فتح نافذة التعليمات البرمجية (Code Window) بالاتجاه الإنجليزي من اليسار لليمين!');
+      } else {
+        showDesignTab();
+        showToast('تمت العودة إلى شاشة التصميم (Design View)!');
+      }
+    }
+
+    // 1. Mini Comparison demo calculation
+    function calculateDemoPrice() {
+      const buyPrice = parseFloat(document.getElementById('sampleBuyPrice').value) || 0;
+      const profit = buyPrice * 0.5;
+      const sellPrice = buyPrice + profit;
+      document.getElementById('sampleSellResult').innerText = sellPrice + ' د.ك';
+      showToast('تمت العملية بنجاح: حساب سعر البيع وفق المعادلة!');
+    }
+
+    // 2. Form IDE simulator calculation
+    function runVisualBasicCalc() {
+      const input = parseFloat(document.getElementById('formInputBuy').value) || 0;
+      const sell = input * 1.5;
+      document.getElementById('formOutputSell').innerText = sell + ' دينار (هامش ربح 50%)';
+      showToast('حدث النقر: قام الحاسوب بتنفيذ تعليمات الزر Button1 في الذاكرة!');
+    }
+
+    // 3. Properties window live binder
+    function updateButtonTextFromProperty(text) {
+      const btn = document.getElementById('formDynamicButton');
+      btn.innerText = text.trim() === '' ? 'زر فارغ' : text;
+    }
+
+    function updateButtonColorFromProperty(colorClass) {
+      const btn = document.getElementById('formDynamicButton');
+      btn.className = `w-full py-2 px-3 rounded-lg text-xs font-bold shadow transition text-white active:scale-95 border-2 ${colorClass} ${colorClass.replace('bg-', 'hover:bg-').replace('600', '700')} border-white/40`;
+      showToast('تم تغيير خاصية BackColor لكائن Button1 بنجاح!');
+    }
+
+    // 4. Pin and Auto Hide simulation
+    const pinStates = {
+      toolbox: true,
+      solution: true,
+      properties: true
+    };
+
+    function togglePin(windowName) {
+      pinStates[windowName] = !pinStates[windowName];
+      const pinIcon = document.getElementById(windowName + 'Pin');
+      const body = document.getElementById(windowName + 'Body');
+
+      if (!pinStates[windowName]) {
+        // Auto-Hide Mode
+        pinIcon.classList.remove('rotate-45');
+        pinIcon.classList.add('text-slate-400');
+        body.classList.add('hidden');
+        showToast(`تم تفعيل الإخفاء التلقائي (Auto Hide) لنافذة ${windowName}! انقري مرة أخرى لتثبيتها.`);
+      } else {
+        // Pinned Mode
+        pinIcon.classList.add('rotate-45');
+        pinIcon.classList.remove('text-slate-400');
+        body.classList.remove('hidden');
+        showToast(`تم تثبيت نافذة ${windowName} بشكل دائم عبر دبوس التثبيت!`);
+      }
+    }
+
+    function toggleAutoHideAll() {
+      const isPinned = pinStates.toolbox || pinStates.solution || pinStates.properties;
+      ['toolbox', 'solution', 'properties'].forEach(win => {
+        pinStates[win] = !isPinned;
+        const pinIcon = document.getElementById(win + 'Pin');
+        const body = document.getElementById(win + 'Body');
+        if (!isPinned) {
+          pinIcon.classList.add('rotate-45');
+          pinIcon.classList.remove('text-slate-400');
+          body.classList.remove('hidden');
+        } else {
+          pinIcon.classList.remove('rotate-45');
+          pinIcon.classList.add('text-slate-400');
+          body.classList.add('hidden');
+        }
+      });
+      showToast(isPinned ? 'تم تطبيق Auto Hide All على جميع النوافذ!' : 'تم إلغاء الإخفاء التلقائي وتثبيت النوافذ!');
+    }
+
+    function resetIDEWindows() {
+      ['toolbox', 'solution', 'properties'].forEach(win => {
+        pinStates[win] = true;
+        const pinIcon = document.getElementById(win + 'Pin');
+        const body = document.getElementById(win + 'Body');
+        pinIcon.classList.add('rotate-45');
+        pinIcon.classList.remove('text-slate-400');
+        body.classList.remove('hidden');
+      });
+      // reset properties
+      document.getElementById('propTextInput').value = "احسب سعر البيع";
+      updateButtonTextFromProperty("احسب سعر البيع");
+      showToast('تم تنفيذ أمر Reset Window Layout وإعادة النوافذ لموضعها الافتراضي!');
+    }
+
+    // 5. Quiz Logic
+    let score = 0;
+    const answered = {};
+
+    function checkAnswer(btn, qNum, isCorrect) {
+      if (answered[qNum]) return; // prevent re-answering
+      answered[qNum] = true;
+
+      const parent = btn.closest('.question-block');
+      const feedback = parent.querySelector('.feedback');
+      const allBtns = parent.querySelectorAll('.quiz-btn');
+
+      allBtns.forEach(b => b.classList.add('opacity-60', 'cursor-not-allowed'));
+
+      if (isCorrect) {
+        score++;
+        btn.classList.remove('border-slate-200', 'opacity-60');
+        btn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'font-bold');
+        feedback.classList.remove('hidden');
+        feedback.classList.add('bg-emerald-50', 'text-emerald-800', 'border', 'border-emerald-200');
+        feedback.innerHTML = '<i class="fa-solid fa-check-circle ml-1"></i> أحسنتِ يا ذكية! إجابة صحيحة ومتقنة 🌸';
+      } else {
+        btn.classList.remove('border-slate-200', 'opacity-60');
+        btn.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-900');
+        feedback.classList.remove('hidden');
+        feedback.classList.add('bg-rose-50', 'text-rose-800', 'border', 'border-rose-200');
+        feedback.innerHTML = '<i class="fa-solid fa-circle-xmark ml-1"></i> إجابة غير دقيقة! راجعي المعلومات التوضيحية بالأعلى واستفيدي منها ✨';
+      }
+
+      document.getElementById('quizScoreDisplay').innerText = `${score} / 5`;
+
+      // Check if all answered
+      if (Object.keys(answered).length === 5) {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      const studentName = document.getElementById('studentNameInput').value.trim() || 'المتعلمة المتألقة';
+      document.getElementById('certStudentName').innerText = studentName;
+      document.getElementById('certificateCard').classList.remove('hidden');
+      
+      // Fire celebratory confetti!
+      triggerConfettiAgain();
+      showToast(`مبارك يا ${studentName}! لقد أكملتِ التحدي المعرفي بنجاح!`);
+    }
+
+    function triggerConfettiAgain() {
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      } catch (e) {
+        console.log("Confetti triggered");
+      }
+    }
+
+    // 6. Toast message helper
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const toastText = document.getElementById('toastMsgText');
+      toastText.innerText = message;
+      toast.classList.remove('translate-y-32');
+      toast.classList.add('translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0');
+        toast.classList.add('translate-y-32');
+      }, 3500);
+    }
+
+    function alertMsg(msg) {
+      showToast(msg);
+    }
+  </script>
+</body>
+</html>
